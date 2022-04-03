@@ -1,0 +1,29 @@
+---
+- name: "Updating the guest operating system."
+  args:
+    warn: false
+  command: "{{ item }}"
+  with_items:
+    - "tdnf -y update"
+- name: "Installing additional packages."
+  args:
+    warn: false
+  command: |
+      tdnf -y install \
+      minimal \
+      logrotate \
+      wget \
+      git \
+      unzip \
+      tar \
+      jq \
+      parted \
+      openssl-c_rehash
+- name: "Importing certificate authortiy certificates."
+  copy:
+    dest: /etc/ssl/certs/root-ca.pem
+    group: root
+    mode: 420
+    owner: root
+    src: root-ca.cer
+  notify: "VMware Photon OS - Updating the certificate authority trust."
