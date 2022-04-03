@@ -412,9 +412,23 @@ build {
     "source.vsphere-iso.windows-server-datacenter-dexp"
   ]
 
-  provisioner "file" {
-    source      = "${path.cwd}/certificates/root-ca.cer"
-    destination = "C:\\windows\\temp\\root-ca.cer"
+  #provisioner "file" {
+  #  source      = "${path.cwd}/certificates/root-ca.cer"
+  #  destination = "C:\\windows\\temp\\root-ca.cer"
+  #}
+
+  provisioner "powershell" {
+    environment_vars = [
+      "BUILD_USERNAME=${var.build_username}"
+    ]
+    elevated_user     = var.build_username
+    elevated_password = var.build_password
+    scripts           = formatlist("${path.cwd}/%s", var.preparationScripts)
+  }
+
+  provisioner "windows-restart" {
+    pause_before = "30s"
+    restart_check_command = "powershell -command \"& {Write-Output 'restarted.'}\""    
   }
 
   provisioner "powershell" {
@@ -423,16 +437,10 @@ build {
     ]
     elevated_user     = var.build_username
     elevated_password = var.build_password
-    scripts           = formatlist("${path.cwd}/%s", var.scripts)
+    scripts           = formatlist("${path.cwd}/%s", var.finishScripts)
   }
 
-  provisioner "powershell" {
-    elevated_user     = var.build_username
-    elevated_password = var.build_password
-    inline            = var.inline
-  }
-
-  provisioner "windows-update" {
+/*   provisioner "windows-update" {
     pause_before    = "30s"
     search_criteria = "IsInstalled=0"
     filters = [
@@ -443,7 +451,7 @@ build {
       "include:$true"
     ]
     restart_timeout = "120m"
-  }
+  } */
 
   post-processor "manifest" {
     output     = "${local.manifest_path}${local.manifest_date}.json"

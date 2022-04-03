@@ -393,6 +393,66 @@ menu_option_12() {
 
 menu_option_13() {
   INPUT_PATH="$SCRIPT_PATH"/builds/windows/server/2022/
+  echo -e "\nCONFIRM: Build Microsoft Windows Server 2022 Standard Desktop Experience Template for VMware vSphere?"
+  echo -e "\nContinue? (y/n)"
+  read -r REPLY
+  if [[ ! $REPLY =~ ^[Yy]$ ]]
+  then
+    exit 1
+  fi
+
+  ### Build Microsoft Windows Server 2022 Standard Desktop Experience Template for VMware vSphere. ###
+  echo "Building Microsoft Windows Server 2022 Standard Desktop Experience Template for VMware vSphere..."
+
+  ### Initialize HashiCorp Packer and required plugins. ###
+  echo "Initializing HashiCorp Packer and required plugins..."
+  packer init "$INPUT_PATH"
+
+  ### Start the Build. ###
+  echo "Starting the build...."
+  packer build -force \
+      --only vsphere-iso.windows-server-standard-dexp \
+      -var-file="$CONFIG_PATH/vsphere.pkrvars.hcl" \
+      -var-file="$CONFIG_PATH/build.pkrvars.hcl" \
+      -var-file="$CONFIG_PATH/common.pkrvars.hcl" \
+      "$INPUT_PATH"
+
+  ### All done. ###
+  echo "Done."
+}
+
+menu_option_14() {
+  INPUT_PATH="$SCRIPT_PATH"/builds/windows/server/2022/
+  echo -e "\nCONFIRM: Build Microsoft Windows Server 2022 Standard Core Template for VMware vSphere?"
+  echo -e "\nContinue? (y/n)"
+  read -r REPLY
+  if [[ ! $REPLY =~ ^[Yy]$ ]]
+  then
+    exit 1
+  fi
+
+  ### Build Microsoft Windows Server 2022 Standard Core Template for VMware vSphere. ###
+  echo "Building Microsoft Windows Server 2022 Standard Core for VMware vSphere..."
+
+  ### Initialize HashiCorp Packer and required plugins. ###
+  echo "Initializing HashiCorp Packer and required plugins..."
+  packer init "$INPUT_PATH"
+
+  ### Start the Build. ###
+  echo "Starting the build...."
+  packer build -force \
+      --only vsphere-iso.windows-server-standard-core \
+      -var-file="$CONFIG_PATH/vsphere.pkrvars.hcl" \
+      -var-file="$CONFIG_PATH/build.pkrvars.hcl" \
+      -var-file="$CONFIG_PATH/common.pkrvars.hcl" \
+      "$INPUT_PATH"
+
+  ### All done. ###
+  echo "Done."
+}
+
+menu_option_15() {
+  INPUT_PATH="$SCRIPT_PATH"/builds/windows/server/2022/
   echo -e "\nCONFIRM: Build Microsoft Windows Server 2022 Datacenter Templates for VMware vSphere?"
   echo -e "\nContinue? (y/n)"
   read -r REPLY
@@ -421,7 +481,67 @@ menu_option_13() {
   echo "Done."
 }
 
-menu_option_14() {
+menu_option_16() {
+  INPUT_PATH="$SCRIPT_PATH"/builds/windows/server/2022/
+  echo -e "\nCONFIRM: Build Microsoft Windows Server 2022 Datacenter Desktop Experience Template for VMware vSphere?"
+  echo -e "\nContinue? (y/n)"
+  read -r REPLY
+  if [[ ! $REPLY =~ ^[Yy]$ ]]
+  then
+    exit 1
+  fi
+
+  ### Build Microsoft Windows Server 2022 Datacenter Desktop Experience Template for VMware vSphere. ###
+  echo "Building Microsoft Windows Server 2022 Datacenter Desktop Experience Template for VMware vSphere..."
+
+  ### Initialize HashiCorp Packer and required plugins. ###
+  echo "Initializing HashiCorp Packer and required plugins..."
+  packer init "$INPUT_PATH"
+
+  ### Start the Build. ###
+  echo "Starting the build...."
+  packer build -force \
+      --only vsphere-iso.windows-server-datacenter-dexp \
+      -var-file="$CONFIG_PATH/vsphere.pkrvars.hcl" \
+      -var-file="$CONFIG_PATH/build.pkrvars.hcl" \
+      -var-file="$CONFIG_PATH/common.pkrvars.hcl" \
+      "$INPUT_PATH"
+
+  ### All done. ###
+  echo "Done."
+}
+
+menu_option_17() {
+  INPUT_PATH="$SCRIPT_PATH"/builds/windows/server/2022/
+  echo -e "\nCONFIRM: Build Microsoft Windows Server 2022 Datacenter Core Template for VMware vSphere?"
+  echo -e "\nContinue? (y/n)"
+  read -r REPLY
+  if [[ ! $REPLY =~ ^[Yy]$ ]]
+  then
+    exit 1
+  fi
+
+  ### Build Microsoft Windows Server 2022 Datacenter Core Template for VMware vSphere. ###
+  echo "Building Microsoft Windows Server 2022 Datacenter Core for VMware vSphere..."
+
+  ### Initialize HashiCorp Packer and required plugins. ###
+  echo "Initializing HashiCorp Packer and required plugins..."
+  packer init "$INPUT_PATH"
+
+  ### Start the Build. ###
+  echo "Starting the build...."
+  packer build -force \
+      --only vsphere-iso.windows-server-datacenter-core \
+      -var-file="$CONFIG_PATH/vsphere.pkrvars.hcl" \
+      -var-file="$CONFIG_PATH/build.pkrvars.hcl" \
+      -var-file="$CONFIG_PATH/common.pkrvars.hcl" \
+      "$INPUT_PATH"
+
+  ### All done. ###
+  echo "Done."
+}
+
+menu_option_18() {
   INPUT_PATH="$SCRIPT_PATH"/builds/windows/server/2019/
   echo -e "\nCONFIRM: Build all Windows Server 2019 Templates for VMware vSphere?"
   echo -e "\nContinue? (y/n)"
@@ -450,7 +570,7 @@ menu_option_14() {
   echo "Done."
 }
 
-menu_option_15() {
+menu_option_19() {
   INPUT_PATH="$SCRIPT_PATH"/builds/windows/server/2019/
   echo -e "\nCONFIRM: Build Microsoft Windows Server 2019 Standard Templates for VMware vSphere?"
   echo -e "\nContinue? (y/n)"
@@ -480,7 +600,67 @@ menu_option_15() {
   echo "Done."
 }
 
-menu_option_16() {
+menu_option_20() {
+  INPUT_PATH="$SCRIPT_PATH"/builds/windows/server/2019/
+  echo -e "\nCONFIRM: Build Microsoft Windows Server 2019 Standard Desktop Experience Template for VMware vSphere?"
+  echo -e "\nContinue? (y/n)"
+  read -r REPLY
+  if [[ ! $REPLY =~ ^[Yy]$ ]]
+  then
+    exit 1
+  fi
+
+  ### Build Microsoft Windows Server 2022 Standard Desktop Experience Template for VMware vSphere. ###
+  echo "Building Microsoft Windows Server 2019 Standard Desktop Experience Template for VMware vSphere..."
+
+  ### Initialize HashiCorp Packer and required plugins. ###
+  echo "Initializing HashiCorp Packer and required plugins..."
+  packer init "$INPUT_PATH"
+
+  ### Start the Build. ###
+  echo "Starting the build...."
+  packer build -force \
+      --only vsphere-iso.windows-server-standard-dexp \
+      -var-file="$CONFIG_PATH/vsphere.pkrvars.hcl" \
+      -var-file="$CONFIG_PATH/build.pkrvars.hcl" \
+      -var-file="$CONFIG_PATH/common.pkrvars.hcl" \
+      "$INPUT_PATH"
+
+  ### All done. ###
+  echo "Done."
+}
+
+menu_option_21() {
+  INPUT_PATH="$SCRIPT_PATH"/builds/windows/server/2019/
+  echo -e "\nCONFIRM: Build Microsoft Windows Server 2019 Standard Core Template for VMware vSphere?"
+  echo -e "\nContinue? (y/n)"
+  read -r REPLY
+  if [[ ! $REPLY =~ ^[Yy]$ ]]
+  then
+    exit 1
+  fi
+
+  ### Build Microsoft Windows Server 2019 Standard Core Template for VMware vSphere. ###
+  echo "Building Microsoft Windows Server 2019 Standard Core for VMware vSphere..."
+
+  ### Initialize HashiCorp Packer and required plugins. ###
+  echo "Initializing HashiCorp Packer and required plugins..."
+  packer init "$INPUT_PATH"
+
+  ### Start the Build. ###
+  echo "Starting the build...."
+  packer build -force \
+      --only vsphere-iso.windows-server-standard-core \
+      -var-file="$CONFIG_PATH/vsphere.pkrvars.hcl" \
+      -var-file="$CONFIG_PATH/build.pkrvars.hcl" \
+      -var-file="$CONFIG_PATH/common.pkrvars.hcl" \
+      "$INPUT_PATH"
+
+  ### All done. ###
+  echo "Done."
+}
+
+menu_option_22() {
   INPUT_PATH="$SCRIPT_PATH"/builds/windows/server/2019/
   echo -e "\nCONFIRM: Build Microsoft Windows Server 2019 Datacenter Templates for VMware vSphere?"
   echo -e "\nContinue? (y/n)"
@@ -510,9 +690,9 @@ menu_option_16() {
   echo "Done."
 }
 
-menu_option_17() {
-  INPUT_PATH="$SCRIPT_PATH"/builds/windows/server/2016/
-  echo -e "\nCONFIRM: Build all Windows Server 2016 Templates for VMware vSphere?"
+menu_option_23() {
+  INPUT_PATH="$SCRIPT_PATH"/builds/windows/server/2019/
+  echo -e "\nCONFIRM: Build Microsoft Windows Server 2019 Datacenter Desktop Experience Template for VMware vSphere?"
   echo -e "\nContinue? (y/n)"
   read -r REPLY
   if [[ ! $REPLY =~ ^[Yy]$ ]]
@@ -520,8 +700,8 @@ menu_option_17() {
     exit 1
   fi
 
-  ### Build all Windows Server 2016 Templates for VMware vSphere. ###
-  echo "Building all Windows Server 2016 Templates for VMware vSphere..."
+  ### Build Microsoft Windows Server 2019 Datacenter Desktop Experience Template for VMware vSphere. ###
+  echo "Building Microsoft Windows Server 2019 Datacenter Desktop Experience Template for VMware vSphere..."
 
   ### Initialize HashiCorp Packer and required plugins. ###
   echo "Initializing HashiCorp Packer and required plugins..."
@@ -530,6 +710,7 @@ menu_option_17() {
   ### Start the Build. ###
   echo "Starting the build...."
   packer build -force \
+      --only vsphere-iso.windows-server-datacenter-dexp \
       -var-file="$CONFIG_PATH/vsphere.pkrvars.hcl" \
       -var-file="$CONFIG_PATH/build.pkrvars.hcl" \
       -var-file="$CONFIG_PATH/common.pkrvars.hcl" \
@@ -539,9 +720,9 @@ menu_option_17() {
   echo "Done."
 }
 
-menu_option_18() {
-  INPUT_PATH="$SCRIPT_PATH"/builds/windows/server/2016/
-  echo -e "\nCONFIRM: Build Microsoft Windows Server 2016 Standard Templates for VMware vSphere?"
+menu_option_24() {
+  INPUT_PATH="$SCRIPT_PATH"/builds/windows/server/2019/
+  echo -e "\nCONFIRM: Build Microsoft Windows Server 2019 Datacenter Core Template for VMware vSphere?"
   echo -e "\nContinue? (y/n)"
   read -r REPLY
   if [[ ! $REPLY =~ ^[Yy]$ ]]
@@ -549,8 +730,8 @@ menu_option_18() {
     exit 1
   fi
 
-  ### Build Microsoft Windows Server 2016 Standard Templates for VMware vSphere. ###
-  echo "Building Microsoft Windows Server 2016 Standard Templates for VMware vSphere..."
+  ### Build Microsoft Windows Server 2019 Datacenter Core Template for VMware vSphere. ###
+  echo "Building Microsoft Windows Server 2019 Datacenter Core for VMware vSphere..."
 
   ### Initialize HashiCorp Packer and required plugins. ###
   echo "Initializing HashiCorp Packer and required plugins..."
@@ -559,95 +740,7 @@ menu_option_18() {
   ### Start the Build. ###
   echo "Starting the build...."
   packer build -force \
-      --only vsphere-iso.windows-server-standard-dexp,vsphere-iso.windows-server-standard-core \
-      -var-file="$CONFIG_PATH/vsphere.pkrvars.hcl" \
-      -var-file="$CONFIG_PATH/build.pkrvars.hcl" \
-      -var-file="$CONFIG_PATH/common.pkrvars.hcl" \
-      "$INPUT_PATH"
-
-  ### All done. ###
-  echo "Done."
-}
-
-menu_option_19() {
-  INPUT_PATH="$SCRIPT_PATH"/builds/windows/server/2016/
-  echo -e "\nCONFIRM: Build Microsoft Windows Server 2016 Datacenter Templates for VMware vSphere?"
-  echo -e "\nContinue? (y/n)"
-  read -r REPLY
-  if [[ ! $REPLY =~ ^[Yy]$ ]]
-  then
-    exit 1
-  fi
-
-  ### Build Microsoft Windows Server 2016 Datacenter Templates for VMware vSphere. ###
-  echo "Building Microsoft Windows Server 2016 Datacenter Templates for VMware vSphere..."
-
-  ### Initialize HashiCorp Packer and required plugins. ###
-  echo "Initializing HashiCorp Packer and required plugins..."
-  packer init "$INPUT_PATH"
-
-  ### Start the Build. ###
-  echo "Starting the build...."
-  packer build -force \
-      --only vsphere-iso.windows-server-datacenter-dexp,vsphere-iso.windows-server-datacenter-core \
-      -var-file="$CONFIG_PATH/vsphere.pkrvars.hcl" \
-      -var-file="$CONFIG_PATH/build.pkrvars.hcl" \
-      -var-file="$CONFIG_PATH/common.pkrvars.hcl" \
-      "$INPUT_PATH"
-
-  ### All done. ###
-  echo "Done."
-}
-
-menu_option_20() {
-  INPUT_PATH="$SCRIPT_PATH"/builds/windows/desktop/11/
-  echo -e "\nCONFIRM: Build a Windows 11 Template for VMware vSphere?"
-  echo -e "\nContinue? (y/n)"
-  read -r REPLY
-  if [[ ! $REPLY =~ ^[Yy]$ ]]
-  then
-    exit 1
-  fi
-
-  ### Build a Windows 11 Template for VMware vSphere. ###
-  echo "Building a Windows 11 Template for VMware vSphere..."
-
-  ### Initialize HashiCorp Packer and required plugins. ###
-  echo "Initializing HashiCorp Packer and required plugins..."
-  packer init "$INPUT_PATH"
-
-  ### Start the Build. ###
-  echo "Starting the build...."
-  packer build -force \
-      -var-file="$CONFIG_PATH/vsphere.pkrvars.hcl" \
-      -var-file="$CONFIG_PATH/build.pkrvars.hcl" \
-      -var-file="$CONFIG_PATH/common.pkrvars.hcl" \
-      "$INPUT_PATH"
-
-  ### All done. ###
-  echo "Done."
-}
-
-menu_option_21() {
-  INPUT_PATH="$SCRIPT_PATH"/builds/windows/desktop/10/
-  echo -e "\nCONFIRM: Build a Windows 10 Template for VMware vSphere?"
-  echo -e "\nContinue? (y/n)"
-  read -r REPLY
-  if [[ ! $REPLY =~ ^[Yy]$ ]]
-  then
-    exit 1
-  fi
-
-  ### Build a Windows 10 Template for VMware vSphere. ###
-  echo "Building a Windows 10 Template for VMware vSphere..."
-
-  ### Initialize HashiCorp Packer and required plugins. ###
-  echo "Initializing HashiCorp Packer and required plugins..."
-  packer init "$INPUT_PATH"
-
-  ### Start the Build. ###
-  echo "Starting the build...."
-  packer build -force \
+      --only vsphere-iso.windows-server-datacenter-core \
       -var-file="$CONFIG_PATH/vsphere.pkrvars.hcl" \
       -var-file="$CONFIG_PATH/build.pkrvars.hcl" \
       -var-file="$CONFIG_PATH/common.pkrvars.hcl" \
@@ -704,16 +797,19 @@ until [ "$selection" = "0" ]; do
   echo "      Microsoft Windows:"
   echo ""
   echo "    	11  -  Windows Server 2022 - All"
-  echo "    	12  -  Windows Server 2022 - Standard Only"
-  echo "    	13  -  Windows Server 2022 - Datacenter Only"
-  echo "    	14  -  Windows Server 2019 - All"
-  echo "    	15  -  Windows Server 2019 - Standard Only"
-  echo "    	16  -  Windows Server 2019 - Datacenter Only"
-  echo "    	17  -  Windows Server 2016 - All"
-  echo "    	18  -  Windows Server 2016 - Standard Only"
-  echo "    	19  -  Windows Server 2016 - Datacenter Only"
-  echo "    	20  -  Windows 11"
-  echo "    	21  -  Windows 10"
+  echo "    	12  -  Windows Server 2022 - All Standard Only"
+  echo "    	13  -  Windows Server 2022 - Dexp Standard Only"
+  echo "    	14  -  Windows Server 2022 - Core Standard Only"
+  echo "    	15  -  Windows Server 2022 - All Datacenter Only"
+  echo "    	16  -  Windows Server 2022 - Dexp Datacenter Only"
+  echo "    	17  -  Windows Server 2022 - Core Datacenter Only"
+  echo "    	18  -  Windows Server 2019 - All"
+  echo "    	19  -  Windows Server 2019 - All Standard Only"
+  echo "    	20  -  Windows Server 2019 - Dexp Standard Only"
+  echo "    	21  -  Windows Server 2019 - Core Standard Only"
+  echo "    	22  -  Windows Server 2019 - All Datacenter Only"
+  echo "    	23  -  Windows Server 2019 - Dexp Datacenter Only"
+  echo "    	24  -  Windows Server 2019 - Core Datacenter Only"
   echo ""
   echo "      Other:"
   echo ""
@@ -744,6 +840,9 @@ until [ "$selection" = "0" ]; do
     19 ) clear ; menu_option_19 ; press_enter ;;
     20 ) clear ; menu_option_20 ; press_enter ;;
     21 ) clear ; menu_option_21 ; press_enter ;;
+    22 ) clear ; menu_option_22 ; press_enter ;;
+    23 ) clear ; menu_option_23 ; press_enter ;;
+    24 ) clear ; menu_option_24 ; press_enter ;;
     I ) clear ; info ; press_enter ;;
     Q ) clear ; exit ;;
     * ) clear ; incorrect_selection ; press_enter ;;

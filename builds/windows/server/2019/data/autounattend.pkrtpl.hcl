@@ -22,63 +22,13 @@
          <DiskConfiguration>
             <Disk wcm:action="add">
                <DiskID>0</DiskID>
-               <WillWipeDisk>true</WillWipeDisk>
-               <CreatePartitions>
-                  <!-- Windows RE Tools partition -->
-                  <CreatePartition wcm:action="add">
-                     <Order>1</Order>
-                     <Type>Primary</Type>
-                     <Size>300</Size>
-                  </CreatePartition>
-                  <!-- System partition (ESP) -->
-                  <CreatePartition wcm:action="add">
-                     <Order>2</Order>
-                     <Type>EFI</Type>
-                     <Size>100</Size>
-                  </CreatePartition>
-                  <!-- Microsoft reserved partition (MSR) -->
-                  <CreatePartition wcm:action="add">
-                     <Order>3</Order>
-                     <Type>MSR</Type>
-                     <Size>128</Size>
-                  </CreatePartition>
-                  <!-- Windows partition -->
-                  <CreatePartition wcm:action="add">
-                     <Order>4</Order>
-                     <Type>Primary</Type>
-                     <Extend>true</Extend>
-                  </CreatePartition>
-               </CreatePartitions>
-               <ModifyPartitions>
-                  <!-- Windows RE Tools partition -->
-                  <ModifyPartition wcm:action="add">
-                     <Order>1</Order>
-                     <PartitionID>1</PartitionID>
-                     <Label>WINRE</Label>
-                     <Format>NTFS</Format>
-                     <TypeID>DE94BBA4-06D1-4D40-A16A-BFD50179D6AC</TypeID>
-                  </ModifyPartition>
-                  <!-- System partition (ESP) -->
-                  <ModifyPartition wcm:action="add">
-                     <Order>2</Order>
-                     <PartitionID>2</PartitionID>
-                     <Label>System</Label>
-                     <Format>FAT32</Format>
-                  </ModifyPartition>
-                  <!-- MSR partition does not need to be modified -->
-                  <ModifyPartition wcm:action="add">
-                     <Order>3</Order>
-                     <PartitionID>3</PartitionID>
-                  </ModifyPartition>
-                  <!-- Windows partition -->
-                  <ModifyPartition wcm:action="add">
-                     <Order>4</Order>
-                     <PartitionID>4</PartitionID>
-                     <Label>OS</Label>
-                     <Letter>C</Letter>
-                     <Format>NTFS</Format>
-                  </ModifyPartition>
-               </ModifyPartitions>
+                <CreatePartitions>
+                    <CreatePartition wcm:action="add">
+                        <Order>1</Order>
+                         <Extend>true</Extend>
+                          <Type>Primary</Type>
+                      </CreatePartition>
+                </CreatePartitions>
             </Disk>
          </DiskConfiguration>
          <ImageInstall>
@@ -89,10 +39,7 @@
                      <Value>${vm_inst_os_image}</Value>
                   </MetaData>
                </InstallFrom>
-               <InstallTo>
-                  <DiskID>0</DiskID>
-                  <PartitionID>4</PartitionID>
-               </InstallTo>
+               <InstallToAvailablePartition>true</InstallToAvailablePartition>
             </OSImage>
          </ImageInstall>
          <UserData>

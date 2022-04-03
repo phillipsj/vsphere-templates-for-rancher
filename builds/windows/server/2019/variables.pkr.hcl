@@ -401,14 +401,20 @@ variable "communicator_timeout" {
 
 // Provisioner Settings
 
-variable "scripts" {
+variable "preparationScripts" {
   type        = list(string)
-  description = "A list of scripts and their relative paths to transfer and run."
+  description = "A list of preparation scripts and their relative paths to transfer and run."
+  default     = []
+}
+
+variable "finishScripts" {
+  type        = list(string)
+  description = "A list of finishing scripts to run."
   default     = []
 }
 
 variable "inline" {
   type        = list(string)
-  description = "A list of commands to run."
+  description = "A list of commands scripts to run."
   default     = []
 }

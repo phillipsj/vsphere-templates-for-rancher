@@ -31,12 +31,12 @@ vm_guest_os_type = "windows2019srv_64Guest"
 // Virtual Machine Hardware Settings
 vm_firmware              = "efi-secure"
 vm_cdrom_type            = "sata"
-vm_cpu_sockets           = 2
-vm_cpu_cores             = 1
+vm_cpu_sockets           = 1
+vm_cpu_cores             = 2
 vm_cpu_hot_add           = false
-vm_mem_size              = 4096
+vm_mem_size              = 8192
 vm_mem_hot_add           = false
-vm_disk_size             = 102400
+vm_disk_size             = 80000
 vm_disk_controller_type  = ["pvscsi"]
 vm_disk_thin_provisioned = true
 vm_network_card          = "vmxnet3"
@@ -61,6 +61,5 @@ communicator_timeout = "12h"
 scripts = ["scripts/windows/windows-prepare.ps1"]
 inline = [
   "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))",
-  "choco feature enable -n allowGlobalConfirmation",
-  "Get-EventLog -LogName * | ForEach { Clear-EventLog -LogName $_.Log }"
+  "choco feature enable -n allowGlobalConfirmation"
 ]

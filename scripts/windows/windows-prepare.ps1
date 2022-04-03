@@ -15,9 +15,9 @@ param(
 $ErrorActionPreference = "Stop"
 
 # Import the Root CA certificate to the Trusted Root Certification Authorities.
-Write-Output "Importing the Root CA certificate to the Trusted Root Certification Authorities..."
-Import-Certificate -FilePath C:\windows\temp\root-ca.cer -CertStoreLocation 'Cert:\LocalMachine\Root' | Out-Null
-Remove-Item C:\windows\temp\root-ca.cer -Confirm:$false
+#Write-Output "Importing the Root CA certificate to the Trusted Root Certification Authorities..."
+#Import-Certificate -FilePath C:\windows\temp\root-ca.cer -CertStoreLocation 'Cert:\LocalMachine\Root' | Out-Null
+#Remove-Item C:\windows\temp\root-ca.cer -Confirm:$false
 
 # Import the Issuing CA certificate to the Trusted Root Certification Authoriries.
 ### Write-Output "Importing the Issuing CA certificate to the Trusted Root Certification Authoriries..."
@@ -66,3 +66,20 @@ Write-Output "Enabling Remote Desktop..."
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server" -Name "fDenyTSConnections" -Value 0 | Out-Null
 Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 0
 Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+
+# Install Containers Feature
+Write-Output "Enabling Containers feature..."
+Install-WindowsFeature -Name Containers -Force
+
+# Install the OpenSSH Client
+Write-Output "Enabling SSH Client..."
+Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0
+
+# Install the OpenSSH Server
+Write-Output "Enabling SSH Server..."
+Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
+
+# Install Chocolatey
+Write-Output "Installing Chocolatey..."
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+choco feature enable -n allowGlobalConfirmation
