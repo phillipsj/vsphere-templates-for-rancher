@@ -26,7 +26,7 @@
                     <CreatePartition wcm:action="add">
                         <Order>1</Order>
                          <Extend>true</Extend>
-                          <Type>Primary</Type>
+                         <Type>Primary</Type>
                       </CreatePartition>
                 </CreatePartitions>
             </Disk>

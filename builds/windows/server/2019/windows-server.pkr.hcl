@@ -337,7 +337,6 @@ source "vsphere-iso" "windows-server-datacenter-dexp" {
   disk_controller_type = var.vm_disk_controller_type
   storage {
     disk_size             = var.vm_disk_size
-    disk_controller_index = 0
     disk_thin_provisioned = var.vm_disk_thin_provisioned
   }
   network_adapters {

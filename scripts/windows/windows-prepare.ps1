@@ -69,7 +69,7 @@ Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
 
 # Install Containers Feature
 Write-Output "Enabling Containers feature..."
-Install-WindowsFeature -Name Containers -Force
+Install-WindowsFeature -Name Containers
 
 # Install the OpenSSH Client
 Write-Output "Enabling SSH Client..."
