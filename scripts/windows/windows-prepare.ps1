@@ -83,3 +83,7 @@ Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
 Write-Output "Installing Chocolatey..."
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 choco feature enable -n allowGlobalConfirmation
+
+# Temporarily disable firewall until the ports all get sorted.
+Write-Output "Disabling Windows firewall until all ports are sorted for K8s..."
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False

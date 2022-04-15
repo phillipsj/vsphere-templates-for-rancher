@@ -29,6 +29,9 @@ autoinstall:
   ssh:
     install-server: true
     allow-pw: true
+  storage:
+    layout:
+      name: direct
   packages:
     - openssh-server
     - open-vm-tools
