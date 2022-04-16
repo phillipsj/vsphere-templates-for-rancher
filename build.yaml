@@ -8,9 +8,6 @@ menu:
         - "proxy.pkrvars.hcl"
         - "common.pkrvars.hcl"
     submenu:
-      - entry: "VMware Photon OS 4"
-        build:
-          path: "builds/linux/photon/4/"
       - entry: "Ubuntu Server 20.04 LTS"
         build:
           path: "builds/linux/ubuntu/20-04-lts/"
