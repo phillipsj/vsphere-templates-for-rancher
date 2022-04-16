@@ -25,7 +25,6 @@ By default, the machine image artifacts are transferred to a [vSphere Content Li
 The following builds are available:
 
 **Linux Distributions**
-* VMware Photon OS 4
 * Ubuntu Server 20.04 LTS
 * Ubuntu Server 18.04 LTS
 * Red Hat Enterprise Linux 8 Server
@@ -33,8 +32,6 @@ The following builds are available:
 * AlmaLinux OS 8
 * Rocky Linux 8
 * CentOS Stream 8
-* CentOS Linux 8
-* CentOS Linux 7
 
 **Microsoft Windows** - _Core and Desktop Experience_
 * Microsoft Windows Server 2022 - Standard and Datacenter
@@ -42,10 +39,6 @@ The following builds are available:
 
 > **NOTES**:
 > * Guest customization is not currently supported for AlmaLinux OS and Rocky Linux in vCenter Server 7.0 Update 2.
->
-> * The Microsoft Windows 11 machine image uses a virtual trusted platform module (vTPM). Refer to the VMware vSphere [product documenation][vsphere-tpm] for requirements and pre-requisites.
->
-> * The Microsoft Windows 11 machine image is not transferred to the content library by default. It is **not supported** to clone an encrypted virtual machine to the content library as an OVF Template. You can adjust the common content library settings to use VM Templates.
 
 ## Requirements
 
@@ -57,6 +50,7 @@ The following builds are available:
     > Required plugins are automatically downloaded and initialized when using `./build.sh`. For dark sites, you may download the plugins and place these same directory as your Packer executable `/usr/local/bin` or `$HOME/.packer.d/plugins`.
 
 **Operating Systems**:
+* openSUSE Tumbleweed
 * Ubuntu Server 20.04 LTS
 * macOS Big Sur and Monterey (Intel)
 
@@ -67,30 +61,43 @@ The following builds are available:
 The following software packages must be installed on the Packer host:
 
 * [Git][download-git] command-line tools.
+  - openSUSE: `zypper install git`
   - Ubuntu: `apt-get install git`
   - macOS: `brew install git`
 * [Ansible][ansible-docs] 2.9 or higher.
+  - openSUSE: `zypper install ansible`
   - Ubuntu: `apt-get install ansible`
   - macOS: `brew install ansible`
 * A command-line .iso creator. Packer will use one of the following:
+  - **xorriso** on openSUSE: `zypper install xorriso`
+  - **mkisofs** on openSUSE: `zypper install mkisofs`
   - **xorriso** on Ubuntu: `apt-get install xorriso`
   - **mkisofs** on Ubuntu: `apt-get install mkisofs`
   - **hdiutil** on macOS: native
 * mkpasswd
+  - openSUSE: `zypper install whois`
   - Ubuntu: `apt-get install whois`
   - macOS: `brew install --cask docker`
 * Coreutils
   - macOS: `brew install coreutils`
-* HashiCorp [Terraform][terraform-install] 1.1.7 or higher.
+* HashiCorp [Terraform][terraform-install] 1.1.7 or higher and [Packer][packer-install] 1.8.0 or higher.
+  - openSUSE:
+    - `sudo zypper refresh && sudo zypper install -y gpg2 curl`
+    - `sudo rpm --import https://rpm.releases.hashicorp.com/gpg`
+    - `sudo zypper ar  https://rpm.releases.hashicorp.com/RHEL/35/x86_64/stable hashicorp`
+    - `sudo zypper refresh && zypper install terraform packer`
   - Ubuntu:
     - `sudo apt-get update && sudo apt-get install -y gnupg software-properties-common curl`
     - `curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -`
     - `sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"`
-    - `sudo apt-get update && sudo apt-get install terraform`
+    - `sudo apt-get update && sudo apt-get install terraform packer`
   - macOS:
     - `brew tap hashicorp/tap`
     - `brew install hashicorp/tap/terraform`
 * [Gomplate](gomplate-install) 3.10.0 or higher.
+  - openSUSE:
+    - `sudo curl -o /usr/local/bin/gomplate -sSL https://github.com/hairyhenderson/gomplate/releases/download/<version>/gomplate_<os>-<arch>`
+    - `sudo chmod 755 /usr/local/bin/gomplate`
   - Ubuntu:
     - `sudo curl -o /usr/local/bin/gomplate -sSL https://github.com/hairyhenderson/gomplate/releases/download/<version>/gomplate_<os>-<arch>`
     - `sudo chmod 755 /usr/local/bin/gomplate`
@@ -105,14 +112,14 @@ The following software packages must be installed on the Packer host:
 
 ### Step 1 - Download the Release
 
-Download the [**latest**](https://github.com/vmware-samples/packer-examples-for-vsphere/releases/latest) release.
+Download the [**latest**]com/(https://github.com/phillipsj/vsphere-templates-for-rancher/releases/latest) release.
 
 You may also clone `main` for the latest prerelease updates.
 
 **Example**:
 
 ```console
-git clone https://github.com/vmware-samples/packer-examples-for-vsphere.git
+git clone https://github.com/phillipsj/vsphere-templates-for-rancher.git
 ```
 
 The directory structure of the repository.
@@ -191,8 +198,6 @@ The files are distributed in the following directories.
 1. Download the x64 guest operating system [.iso][iso] images.
 
     **Linux Distributions**
-    * VMware Photon OS 4 Server
-        * [Download][download-linux-photon-server-4] the 4.0 Rev2 release of the **FULL** `.iso` image. (_e.g._ `photon-4.0-xxxxxxxxx.iso`)
     * Ubuntu Server 20.04 LTS
         * [Download][download-linux-ubuntu-server-20-04-lts] the latest **LIVE** release `.iso` image. (_e.g._ `ubuntu-20.04.x-live-server-amd64.iso`)
     * Ubuntu Server 18.04 LTS
@@ -207,10 +212,6 @@ The files are distributed in the following directories.
         * [Download][download-linux-rocky-server-8] the latest release of the **FULL** `.iso` image. (_e.g._ `Rocky-8.x-x86_64-dvd1.iso`)
     * CentOS Stream 8
         * [Download][download-linux-centos-stream-8] the latest release of the **FULL** `.iso` image. (_e.g._ `CentOS-Stream-8-x86_64-latest-dvd1.iso`)
-    * CentOS Linux 8
-        * [Download][download-linux-centos-server-8] the latest release of the **FULL** `.iso` image. (_e.g._ `CentOS-8.x.xxxx-x86_64-dvd1.iso`)
-    * CentOS Linux 7
-        * [Download][download-linux-centos-server-7] the latest release of the **FULL** `.iso` image. (_e.g._ `CentOS-7-x86_64-DVD.iso`)
 
     **Microsoft Windows**
     * Microsoft Windows Server 2022
