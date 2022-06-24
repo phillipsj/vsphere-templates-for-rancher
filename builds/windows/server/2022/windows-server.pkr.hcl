@@ -412,10 +412,10 @@ build {
     "source.vsphere-iso.windows-server-datacenter-dexp"
   ]
 
-  provisioner "file" {
-    source      = "${path.cwd}/certificates/root-ca.cer"
-    destination = "C:\\windows\\temp\\root-ca.cer"
-  }
+  #provisioner "file" {
+  #  source      = "${path.cwd}/certificates/root-ca.cer"
+  #  destination = "C:\\windows\\temp\\root-ca.cer"
+  #}
 
   provisioner "windows-restart" {
     pause_before          = "10s"
