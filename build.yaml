@@ -19,11 +19,6 @@ menu:
           path: "builds/linux/rhel/8/"
           var_files:
             - "rhsm.pkrvars.hcl"
-      - entry: "Red Hat Enterprise Linux 7"
-        build:
-          path: "builds/linux/rhel/7/"
-          var_files:
-            - "rhsm.pkrvars.hcl"
       - entry: "AlmaLinux OS 8"
         message: "an AlmaLinux OS 8 Template"
         build:
