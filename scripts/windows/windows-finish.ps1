@@ -27,6 +27,7 @@ Set-Content -Path "C:\Program Files\Cloudbase Solutions\Cloudbase-Init\conf\clou
 [DEFAULT]
 username=rancher
 groups=Administrators
+netbios_host_name_compatibility=false
 inject_user_password=true
 retry_count=6
 retry_count_interval=10
@@ -35,8 +36,8 @@ bsdtar_path=C:\Program Files\Cloudbase Solutions\Cloudbase-Init\bin\bsdtar.exe
 mtools_path=C:\Program Files\Cloudbase Solutions\Cloudbase-Init\bin\
 verbose=true
 debug=true
-logdir=C:\Program Files\Cloudbase Solutions\Cloudbase-Init\log\
-logfile=cloudbase-init.log
+log-dir=C:\Program Files\Cloudbase Solutions\Cloudbase-Init\log\
+log-file=cloudbase-init.log
 default_log_levels=comtypes=INFO,suds=INFO,iso8601=WARN,requests=WARN
 logging_serial_port_settings=
 mtu_use_dhcp_config=true
@@ -50,7 +51,8 @@ plugins=cloudbaseinit.plugins.common.mtu.MTUPlugin,
         cloudbaseinit.plugins.common.sshpublickeys.SetUserSSHPublicKeysPlugin,
         cloudbaseinit.plugins.windows.certificates.ServerCertificatesPlugin,
         cloudbaseinit.plugins.common.networkconfig.NetworkConfigPlugin,
-        cloudbaseinit.plugins.common.localscripts.LocalScriptsPlugin
+        cloudbaseinit.plugins.common.localscripts.LocalScriptsPlugin,
+        cloudbaseinit.plugins.windows.extendvolumes.ExtendVolumesPlugin
 check_latest_version=true
 allow_reboot=false
 stop_service_on_exit=false
